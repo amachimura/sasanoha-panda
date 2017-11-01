@@ -1,4 +1,4 @@
-t LINE_CHANNEL_ACCESS_TOKEN = 'Channl Access Token';
+const LINE_CHANNEL_ACCESS_TOKEN = 'A1j5wzdp9/zZFySROIOu+xRKYiwprNdoXV5EQNyvw1XJvnc1GFd19TTfZebfukKzmZ46IcD3gbUL8YcmjSoiRDOjmzXnDwAn1v+7IS18G2YYcwjOaHbTGGQfDaVNc4Fy+3OPzvcfyjynqmw4d4E6WAdB04t89/1O/w1cDnyilFU=';
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -12,7 +12,7 @@ app.post('/hook', function(req, res, next){
         if (event.type == 'message' && event.message.text == 'ハロー'){
             var headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + 'A1j5wzdp9/zZFySROIOu+xRKYiwprNdoXV5EQNyvw1XJvnc1GFd19TTfZebfukKzmZ46IcD3gbUL8YcmjSoiRDOjmzXnDwAn1v+7IS18G2YYcwjOaHbTGGQfDaVNc4Fy+3OPzvcfyjynqmw4d4E6WAdB04t89/1O/w1cDnyilFU='
+                'Authorization': 'Bearer ' + LINE_CHANNEL_ACCESS_TOKEN
             }
             var body = {
                 replyToken: event.replyToken,
