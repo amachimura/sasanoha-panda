@@ -11,7 +11,7 @@ var server = app.listen(process.env.PORT || 3000, function(){
 
 app.post('/hook', function(req, res, next){
     res.status(200).end();
-    console.log(req.body);
+    console.log(req);
     for (var event of req.body.events){
         if (event.type == 'message' && event.message.text == 'ハロー'){
             var headers = {
