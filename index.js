@@ -3,6 +3,11 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlEncoded({
+  extended: true
+}));
+
 var server = app.listen(process.env.PORT || 3000, function(){
     console.log("listening port:" + server.address().port);
 });
