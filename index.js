@@ -5,6 +5,10 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 
+var server = app.listen(3000, function(){
+    console.log("listening port:" + server.address().port);
+});
+
 app.post('/hook', function(req, res, next){
     res.status(200).end();
     console.log(req.body);
