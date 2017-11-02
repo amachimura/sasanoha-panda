@@ -14,8 +14,8 @@ var server = app.listen(process.env.PORT || 3000, function(){
 });
 
 app.post('/hook', (req, res) => {
-    console.log(req.body);
-    var message = '';
+    console.log(req.body.events[0].message.text);
+    var message = 'hoge';
     if(req.body.events[0].message.text.indexOf('練習') != -1){
       scheduleService.getOurEvents((b) => {
         message = b[0];
