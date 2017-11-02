@@ -18,7 +18,10 @@ app.post('/hook', (req, res) => {
     var message = 'hoge';
     if(req.body.events[0].message.text.indexOf('練習') != -1){
       scheduleService.getOurEvents((b) => {
-        message = b[0];
+        for(i=0; i < b.length; i++){
+          console.log('schedule is :' + b[i]);
+          message = message + b[i] + '¥n';
+        }
       });
     };
     const options = {
