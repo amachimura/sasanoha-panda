@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
+var scheduleService = require('./google/scheduleService.js')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -14,6 +15,12 @@ var server = app.listen(process.env.PORT || 3000, function(){
 
 app.post('/hook', (req, res) => {
     console.log(req.body);
+    var message = '';
+    if(req.body.events[0].message.text.contains('練習')){
+      scheduleService.getOurEvents((b) => {
+        message = b[0];
+      });
+    };
     const options = {
       method: 'POST',
       uri: 'https://api.line.me/v2/bot/message/reply',
@@ -21,7 +28,7 @@ app.post('/hook', (req, res) => {
         replyToken: req.body.events[0].replyToken,
         messages: [{
           type: 'text',
-          text: req.body.events[0].message.text // ここに指定した文字列がボットの発言になる
+          text: message // ここに指定した文字列がボットの発言になる
         }]
       },
       auth: {
