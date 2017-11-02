@@ -52,8 +52,8 @@ function listAllEvents(auth,cb) {
     for (i = 0; i < res.items.length; i++) {
       var calId = res.items[i].id;
       var tday = new Date();
-      var targetSec = tday.getTime() + (2 * 86400000);
-      tday.setTime(targetSec);
+      var targetMonth = tday.getMonth + 2;
+      tday.setMonth(targetMonth);
       console.log("get "+calId);
       console.log(tday.toISOString());
 
