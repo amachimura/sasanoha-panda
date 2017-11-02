@@ -32,5 +32,3 @@ app.post('/hook', function(req, res, next){
     });
     res.send('OK')
   });
-  }
-});
