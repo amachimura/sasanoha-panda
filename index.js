@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
 
-var server = app.listen(3000, function(){
+var server = app.listen(process.env.PORT || 3000, function(){
     console.log("listening port:" + server.address().port);
 });
 
