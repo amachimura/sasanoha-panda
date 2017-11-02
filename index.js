@@ -18,13 +18,14 @@ app.post('/hook', (req, res) => {
     var message = 'hoge';
     if(req.body.events[0].message.text.indexOf('練習') != -1){
       scheduleService.getOurEvents((b) => {
+        console.log(b);
         for(i=0; i < b.length; i++){
           console.log('schedule is :' + b[i]);
           message = message + b[i] + '¥n';
         }
       });
     };
-    const options = {
+    var options = {
       method: 'POST',
       uri: 'https://api.line.me/v2/bot/message/reply',
       body: {
