@@ -7,8 +7,7 @@ var server = app.listen(process.env.PORT || 3000, function(){
     console.log("listening port:" + server.address().port);
 });
 
-app.post('/hook', function(req, res, next){
-    res.status(200).end();
+app.post('/hook', (req, res) => {
     console.log(req.body);
     const options = {
       method: 'POST',
