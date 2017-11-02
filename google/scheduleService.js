@@ -46,7 +46,7 @@ function listAllEvents(auth,cb) {
       console.log('The API returned an error: ' + err);
       return;
     }
-    //console.log(res.items);
+    console.log('calendars ' + res.items);
     const numCals = res.items.length;
     var doneCals = 0;
     for (i = 0; i < res.items.length; i++) {
@@ -54,8 +54,8 @@ function listAllEvents(auth,cb) {
       var tday = new Date();
       var targetSec = tday.getTime() + (2 * 86400000);
       tday.setTime(targetSec);
-      //console.log("get "+calId);
-      //console.log(tday.toISOString());
+      console.log("get "+calId);
+      console.log(tday.toISOString());
 
       calendar.events.list({
         auth: auth,
