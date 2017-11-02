@@ -9,7 +9,7 @@ var server = app.listen(process.env.PORT || 3000, function(){
 
 app.post('/hook', function(req, res, next){
     res.status(200).end();
-    console.log(req);
+    console.log(req.body);
     const options = {
       method: 'POST',
       uri: 'https://api.line.me/v2/bot/message/reply',
