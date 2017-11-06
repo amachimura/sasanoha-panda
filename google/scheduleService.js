@@ -93,9 +93,9 @@ function listAllEvents(auth,cb) {
         }
       });
     }
+    console.log('break the loop');
+    return cb(buf);
   });
-  console.log('break the loop');
-  return cb(buf);
 }
 
 exports.getOurEvents = getOurEvents;
