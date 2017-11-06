@@ -61,7 +61,7 @@ function listAllEvents(auth,cb) {
         auth: auth,
         calendarId: calId,
         timeMin: (new Date()).toISOString(),
-        timeMax: tday.toISOString(),
+        timeMax: targetMonth.toISOString(),
         maxResults: 10,
         singleEvents: true,
         orderBy: 'startTime'
