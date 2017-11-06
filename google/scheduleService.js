@@ -67,6 +67,7 @@ function listAllEvents(auth,cb) {
         orderBy: 'startTime'
       }, (err2, res2) => {
         if (err2) {
+          doneCals++;
           console.log('The API returned an error: ' + err2);
           return;
         }
@@ -86,15 +87,11 @@ function listAllEvents(auth,cb) {
           }
         }
         doneCals++;
-        console.log('done: ' + doneCals);
-        console.log('num: ' + numCals);
         if (doneCals + 1 >= numCals) {
           return cb(buf);
         }
       });
     }
-    console.log('break the loop');
-    return cb(buf);
   });
 }
 
