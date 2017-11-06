@@ -70,18 +70,18 @@ function listAllEvents(auth,cb) {
           console.log('The API returned an error: ' + err2);
           return;
         }
-        //console.log(res2);
+        console.log(res2);
         var events = res2.items;
         if (!events || events.length == 0) {
-          //console.log('No upcoming events found. ');
+          console.log('No upcoming events found. ');
           //console.log(res2);
         } else {
-          //console.log('Upcoming events:');
+          console.log('Upcoming events:');
           for (var i = 0; i < events.length; i++) {
             var event = events[i];
             var start = event.start.dateTime || event.start.date;
             buf.push(start + " " + event.summary);
-            //console.log('%s - %s', start, event.summary);
+            console.log('%s - %s', start, event.summary);
           }
         }
         doneCals++;
