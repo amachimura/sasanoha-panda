@@ -18,10 +18,10 @@ app.post('/hook', (req, res) => {
     if(req.body.events[0].message.text.indexOf('次の練習') != -1){
       scheduleService.getOurEvents((b) => {
         console.log(b);
-        let message = "次の練習は\\n\n"
+        let message = "次の練習は\\\n"
         for(i=0; i < b.length; i++){
           console.log('schedule is :' + b[i]);
-          message = message + b[i] + "¥¥n";
+          message = message + b[i] + "\n";
           console.log(message);
         }
         message = message + 'だパンダ'
