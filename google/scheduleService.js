@@ -92,6 +92,7 @@ function listAllEvents(auth,cb) {
         }
       });
     }
+    return cb(buf);
   });
 }
 
