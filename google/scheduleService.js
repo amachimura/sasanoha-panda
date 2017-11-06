@@ -85,6 +85,8 @@ function listAllEvents(auth,cb) {
           }
         }
         doneCals++;
+        console.log('done: ' + doneCals);
+        console.log('num: ' + numCals);
         if (doneCals + 1 >= numCals) {
           return cb(buf);
         }
