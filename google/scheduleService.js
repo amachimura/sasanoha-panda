@@ -53,7 +53,7 @@ function listAllEvents(auth,cb) {
     for (i = 0; i < res.items.length; i++) {
       var calId = res.items[i].id;
       var tday = new Date();
-      var targetMonth = tday.addMonth(2);
+      var targetMonth = tday.addMonths(2);
       console.log("get "+calId);
       console.log(tday);
 
