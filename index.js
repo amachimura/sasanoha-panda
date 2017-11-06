@@ -22,6 +22,7 @@ app.post('/hook', (req, res) => {
         for(i=0; i < b.length; i++){
           console.log('schedule is :' + b[i]);
           message = message + b[i] + '¥n';
+          console.log(message);
         }
       });
     };
