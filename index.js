@@ -42,7 +42,7 @@ app.post('/hook', (req, res) => {
       json: true
     }
     request(options, (err, response, body) => {
-      console.log(JSON.stringify(response))
+      console.log('response: ' + JSON.stringify(response))
     });
     res.send('OK')
   });
