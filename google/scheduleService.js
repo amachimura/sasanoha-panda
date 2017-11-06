@@ -94,6 +94,7 @@ function listAllEvents(auth,cb) {
       });
     }
   });
+  console.log('break the loop');
   return cb(buf);
 }
 
