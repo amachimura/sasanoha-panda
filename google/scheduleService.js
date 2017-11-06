@@ -81,6 +81,7 @@ function listAllEvents(auth,cb) {
             var event = events[i];
             var start = event.start.dateTime || event.start.date;
             buf.push(start + " " + event.summary);
+
             console.log('%s - %s', start, event.summary);
           }
         }
@@ -92,8 +93,8 @@ function listAllEvents(auth,cb) {
         }
       });
     }
-    return cb(buf);
   });
+  return cb(buf);
 }
 
 exports.getOurEvents = getOurEvents;
