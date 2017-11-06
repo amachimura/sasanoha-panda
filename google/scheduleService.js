@@ -55,7 +55,7 @@ function listAllEvents(auth,cb) {
       var tday = new Date();
       var targetMonth = tday.addMonth(2);
       console.log("get "+calId);
-      console.log(tday.toISOString());
+      console.log(tday);
 
       calendar.events.list({
         auth: auth,
