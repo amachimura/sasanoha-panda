@@ -24,6 +24,7 @@ app.post('/hook', (req, res) => {
           message = message + b[i] + '¥n';
           console.log(message);
         }
+        options.body.messages[0][text] = message;
       });
     };
     var options = {
@@ -42,7 +43,7 @@ app.post('/hook', (req, res) => {
       json: true
     }
     request(options, (err, response, body) => {
-      console.log('response: ' + JSON.stringify(response))
+      console.log('body: ' + JSON.stringify(body))
     });
     res.send('OK')
   });
