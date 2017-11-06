@@ -1,6 +1,6 @@
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
-var dateUtils = require('date-utils');
+var moment = require('moment');
 
 var buf = [];
 getOurEvents = (cb) => {
@@ -52,16 +52,16 @@ function listAllEvents(auth,cb) {
     var doneCals = 0;
     for (i = 0; i < res.items.length; i++) {
       var calId = res.items[i].id;
-      var tday = new Date();
-      var targetMonth = tday.addMonths(2);
+      var tday = moment();
+      var targetMonth = tday.add(2, 'months');
       console.log("get "+calId);
-      console.log(tday.toISOString());
+      console.log(targetMonth.format());
 
       calendar.events.list({
         auth: auth,
         calendarId: calId,
-        timeMin: (new Date()).toISOString(),
-        timeMax: targetMonth.toISOString(),
+        timeMin: (moment()).format(),
+        timeMax: targetMonth.format(),
         maxResults: 10,
         singleEvents: true,
         orderBy: 'startTime'
