@@ -25,6 +25,9 @@ app.post('/hook', (req, res) => {
           console.log(message);
         }
         options.body.messages[0]['text'] = message;
+        request(options, (err, response, body) => {
+          console.log('body: ' + JSON.stringify(body))
+        });
       });
     };
     var options = {
@@ -42,8 +45,5 @@ app.post('/hook', (req, res) => {
       },
       json: true
     }
-    request(options, (err, response, body) => {
-      console.log('body: ' + JSON.stringify(body))
-    });
     res.send('OK')
   });
