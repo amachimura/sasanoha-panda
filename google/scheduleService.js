@@ -1,5 +1,6 @@
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
+var dateUtils = require('date-utils');
 
 var buf = [];
 getOurEvents = (cb) => {
@@ -52,8 +53,7 @@ function listAllEvents(auth,cb) {
     for (i = 0; i < res.items.length; i++) {
       var calId = res.items[i].id;
       var tday = new Date();
-      var targetMonth = tday.getMonth + 2;
-      tday.setMonth(targetMonth);
+      var targetMonth = tday.addMonth(2);
       console.log("get "+calId);
       console.log(tday.toISOString());
 
