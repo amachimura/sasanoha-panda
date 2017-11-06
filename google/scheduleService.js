@@ -81,8 +81,10 @@ function listAllEvents(auth,cb) {
           for (var i = 0; i < events.length; i++) {
             var event = events[i];
             var start = event.start.dateTime || event.start.date;
-            var formatted = moment(start).format("YYYY年M月D日(ddd)　k:mm");
-            buf.push(formatted + " " + event.summary);
+            var formatted = moment(start).utcOffset(9).format("M/D(ddd)　k:mm");
+            var end = event.end.dateTime || event.start.date;
+            var formattedEnd = moment(end).utcOffset(9).format("k:mm");
+            buf.push(formatted + "-" + formattedEnd + "@" + event.location);
 
             console.log('%s - %s', start, event.summary);
           }
