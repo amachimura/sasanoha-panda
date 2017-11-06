@@ -15,10 +15,10 @@ var server = app.listen(process.env.PORT || 3000, function(){
 
 app.post('/hook', (req, res) => {
     console.log(req.body.events[0].message.text);
-    var message = 'hoge';
-    if(req.body.events[0].message.text.indexOf('練習') != -1){
+    if(req.body.events[0].message.text.indexOf('次の練習') != -1){
       scheduleService.getOurEvents((b) => {
         console.log(b);
+        let message = '次の練習は ¥¥n'
         for(i=0; i < b.length; i++){
           console.log('schedule is :' + b[i]);
           message = message + b[i] + '¥n';
@@ -28,6 +28,7 @@ app.post('/hook', (req, res) => {
         request(options, (err, response, body) => {
           console.log('body: ' + JSON.stringify(body))
         });
+
       });
     };
     var options = {
@@ -37,7 +38,7 @@ app.post('/hook', (req, res) => {
         replyToken: req.body.events[0].replyToken,
         messages: [{
           type: 'text',
-          text: message // ここに指定した文字列がボットの発言になる
+          text: '' // ここに指定した文字列がボットの発言になる
         }]
       },
       auth: {
