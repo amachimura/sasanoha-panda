@@ -81,7 +81,7 @@ function listAllEvents(auth,cb) {
           for (var i = 0; i < events.length; i++) {
             var event = events[i];
             var start = event.start.dateTime || event.start.date;
-            var formatted = start.toFormat("YYYY年MM月DD日　HH24時MI分");
+            var formatted = moment(start).format("YYYY年M月D日(ddd)　k:mm");
             buf.push(formatted + " " + event.summary);
 
             console.log('%s - %s', start, event.summary);
