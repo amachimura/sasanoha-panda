@@ -84,6 +84,7 @@ function listAllEvents(auth,cb) {
             var formatted = moment(start).utcOffset(9).format("M/D(ddd)　k:mm");
             var end = event.end.dateTime || event.start.date;
             var formattedEnd = moment(end).utcOffset(9).format("k:mm");
+            var location = event.location || "場所未定"; 
             buf.push(formatted + "-" + formattedEnd + "@" + event.location);
 
             console.log('%s - %s', start, event.summary);
