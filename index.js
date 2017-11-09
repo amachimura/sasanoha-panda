@@ -10,7 +10,6 @@ var options = {
   method: 'POST',
   uri: 'https://api.line.me/v2/bot/message/reply',
   body: {
-    replyToken: req.body.events[0].replyToken,
     messages: [{
       type: 'text',
       text: '' // ここに指定した文字列がボットの発言になる
@@ -33,6 +32,7 @@ var server = app.listen(process.env.PORT || 3000, function(){
 
 app.post('/hook', (req, res) => {
     console.log(req.body.events[0].message.text);
+    options.body.replyToken = req.body.events[0].replyToken;
     if(req.body.events[0].message.text.indexOf('次の練習') != -1){
       scheduleService.getOurEvents((b) => {
         console.log(b);
