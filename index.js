@@ -39,10 +39,10 @@ app.post('/hook', (req, res) => {
         let message = "次の練習は\n\n"
         for(i=0; i < b.length; i++){
           console.log('schedule is :' + b[i]);
-          message = "・" + message + b[i] + "\n\n";
+          message = message + "・" +b[i] + "\n\n";
           console.log(message);
         }
-        message = message + "だパンダ。 \n\n\n\n 参加予定はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
+        message = message + "だパンダ。 \n\n ================== \n 参加予定はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
         options.body.messages[0]['text'] = message;
         request(options, (err, response, body) => {
           console.log('body: ' + JSON.stringify(body))
