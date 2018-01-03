@@ -63,3 +63,7 @@ app.post('/hook', (req, res) => {
 
     });
   });
+  app.post('/push', (req, res) => {
+    console.log(req);
+    res.send(req);
+  });
