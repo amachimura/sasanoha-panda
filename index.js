@@ -1,10 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
+var fs = require('fs');
 var app = express();
 var scheduleService = require('./google/scheduleService.js');
 const densukeUrl = "https://densuke.biz/list?cd=sQFkNy4e6fmhpmwY";
 const portalUrl = "https://sites.google.com/site/sasanohaportal/home/practice";
+const idToPost = "Ubdd6d86e0412809cc477c9adb6c0149f";
 
 var options = {
   method: 'POST',
@@ -34,8 +36,14 @@ var server = app.listen(process.env.PORT || 3000, function(){
 });
 
 app.post('/hook', (req, res) => {
-    console.log('userId: ' + req.body.events[0].source.userId);
+    var userId = req.body.events[0].source.groupId || req.body.events[0].source.userId;
+    console.log('userId: ' + userId);
     console.log(req.body.events[0].message.text);
+    if(req.body.events[0].type === "join") {
+      fs.open("/files/contact", 'a+', funcion(file){
+        fs.appendFile(file, userId);
+      });
+    }
     options.body.replyToken = req.body.events[0].replyToken;
     if(req.body.events[0].message.text.indexOf('次の練習') != -1){
       scheduleService.getOurEvents((b) => {
@@ -70,6 +78,7 @@ app.post('/hook', (req, res) => {
       let optionsPost = Object.assign({}, options);
       optionsPost.uri = pushEndPoint;
       optionsPost.body.messages[0]['text'] = message;
+      optionsPost.to = idToPost;
       request(optionsPost, (err, response, body) => {
         console.log('body: ' + JSON.stringify(body));
       });
