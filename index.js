@@ -87,5 +87,5 @@ app.post('/hook', (req, res) => {
 
   app.post('/pushTommorow', (req, res) => {
     console.log(req);
-    res.send(req);
+    res.send('ok');
   });
