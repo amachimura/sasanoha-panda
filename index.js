@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
-var fs = require('fs');
+// var fs = require('fs');
 var app = express();
 var scheduleService = require('./google/scheduleService.js');
 const densukeUrl = "https://densuke.biz/list?cd=sQFkNy4e6fmhpmwY";
@@ -39,11 +39,11 @@ app.post('/hook', (req, res) => {
     var userId = req.body.events[0].source.groupId || req.body.events[0].source.userId;
     console.log('userId: ' + userId);
     console.log(req.body.events[0].message.text);
-    if(req.body.events[0].type === "join") {
-      fs.open("/files/contact", 'a+', function(file){
-        fs.appendFile(file, userId);
-      });
-    }
+    // if(req.body.events[0].type === "join") {
+    //   fs.open("/files/contact", 'a+', function(file){
+    //     fs.appendFile(file, userId);
+    //   });
+    // }
     options.body.replyToken = req.body.events[0].replyToken;
     if(req.body.events[0].message.text.indexOf('次の練習') != -1){
       scheduleService.getOurEvents((b) => {
