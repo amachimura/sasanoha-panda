@@ -91,7 +91,7 @@ function listAllEvents(auth,cb) {
           console.log('Upcoming events:');
           for (var i = 0; i < events.length; i++) {
             var event = events[i];
-            formatGoogleEvent(event);
+            buf.push(formatGoogleEvent(event));
             console.log('%s - %s', start, event.summary);
           }
         }
