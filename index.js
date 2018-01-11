@@ -21,6 +21,8 @@ var options = {
   json: true
 };
 
+var pushEndPoint = "https://api.line.me/v2/bot/message/push";
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -58,16 +60,21 @@ app.post('/hook', (req, res) => {
     res.send('OK')
   });
 
-  app.post('/pushNext', (req, res) => {
-    scheduleService.getOurEvents((b) => {
-      let message = "次の練習は\n\n";
-      console.log(b[0]);
-      message = "・" + message + b[0] + "\n\n だパンダ \n\n\n\n 参加予定変わった人はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
+  app.post('/pushThisWeek', (req, res) => {
+      let message = "今週の練習は\n\n";
+      console.log(req.body.event);
+      message = message + "・" scheduleService.formatGoogleEvent(req.body.event) + "\n\n だパンダ \n\n\n\n 参加予定変わった人はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
 
-
-    });
+      let optionsPost = Object.assign({}, options);
+      optionsPost.uri = pushEndPoint;
+      optionsPost.body.messages[0]['text'] = message;
+      request(optionsPost, (err, response, body) => {
+        console.log('body: ' + JSON.stringify(body));
+      });
+      res.send('OK');
   });
-  app.post('/push', (req, res) => {
+
+  app.post('/pushTommorow', (req, res) => {
     console.log(req);
     res.send(req);
   });

@@ -14,6 +14,17 @@ getOurEvents = (cb) => {
   }
 };
 
+formatGoogleEvent = (event) => {
+  var start = event.start.dateTime || event.start.date;
+  var formatted = moment(start).utcOffset(9).format("M/D(ddd)　k:mm");
+  var end = event.end.dateTime || event.start.date;
+  var formattedEnd = moment(end).utcOffset(9).format("k:mm");
+  var location = !!event.location ? event.location : "場所未定";
+  var description = !!event.description ? event.description : "";
+
+  return formatted + "-" + formattedEnd + "@" + location + "\n\n" + description;
+}
+
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
@@ -80,14 +91,7 @@ function listAllEvents(auth,cb) {
           console.log('Upcoming events:');
           for (var i = 0; i < events.length; i++) {
             var event = events[i];
-            var start = event.start.dateTime || event.start.date;
-            var formatted = moment(start).utcOffset(9).format("M/D(ddd)　k:mm");
-            var end = event.end.dateTime || event.start.date;
-            var formattedEnd = moment(end).utcOffset(9).format("k:mm");
-            var location = !!event.location ? event.location : "場所未定";
-            var description = !!event.description ? event.description : "";
-            buf.push(formatted + "-" + formattedEnd + "@" + location + "\n\n" + description);
-
+            formatGoogleEvent(event);
             console.log('%s - %s', start, event.summary);
           }
         }
@@ -101,3 +105,4 @@ function listAllEvents(auth,cb) {
 }
 
 exports.getOurEvents = getOurEvents;
+exports.formatGoogleEvent = formatGoogleEvent;
