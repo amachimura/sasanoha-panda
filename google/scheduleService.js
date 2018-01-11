@@ -92,7 +92,7 @@ function listAllEvents(auth,cb) {
           for (var i = 0; i < events.length; i++) {
             var event = events[i];
             buf.push(formatGoogleEvent(event));
-            console.log('%s - %s', start, event.summary);
+            console.log('%s - %s', event.start.dateTime, event.summary);
           }
         }
         doneCals++;
