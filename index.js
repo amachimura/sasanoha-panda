@@ -40,7 +40,7 @@ app.post('/hook', (req, res) => {
     console.log('userId: ' + userId);
     console.log(req.body.events[0].message.text);
     if(req.body.events[0].type === "join") {
-      fs.open("/files/contact", 'a+', funcion(file){
+      fs.open("/files/contact", 'a+', function(file){
         fs.appendFile(file, userId);
       });
     }
