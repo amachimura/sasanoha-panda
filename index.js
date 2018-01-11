@@ -71,6 +71,7 @@ app.post('/hook', (req, res) => {
 
   app.post('/pushThisWeek', (req, res) => {
       let message = "今週の練習は\n\n";
+      console.log(req);
       console.log(req.body.event);
       let schedule = scheduleService.formatGoogleEvent(req.body.event);
       message = message + "・" + schedule + "\n\n だパンダ \n\n\n\n 参加予定変わった人はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
