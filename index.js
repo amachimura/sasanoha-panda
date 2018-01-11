@@ -34,6 +34,7 @@ var server = app.listen(process.env.PORT || 3000, function(){
 });
 
 app.post('/hook', (req, res) => {
+    console.log('userId: ' + req.body.events[0].source.userId);
     console.log(req.body.events[0].message.text);
     options.body.replyToken = req.body.events[0].replyToken;
     if(req.body.events[0].message.text.indexOf('次の練習') != -1){
