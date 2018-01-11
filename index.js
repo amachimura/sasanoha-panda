@@ -38,11 +38,15 @@ app.post('/hook', (req, res) => {
       scheduleService.getOurEvents((b) => {
         console.log(b);
         let message = "次の練習は\n\n"
-        for(i=0; i < b.length; i++){
-          console.log('schedule is :' + b[i]);
-          message = message + "・" +b[i] + "\n\n";
+        // for(i=0; i < b.length; i++){
+        //   console.log('schedule is :' + b[i]);
+        //   message = message + "・" +b[i] + "\n\n";
+        //   console.log(message);
+        // }
+          console.log('schedule is :' + b[0]);
+          message = message + "・" +b[0] + "\n\n";
           console.log(message);
-        }
+
         message = message + "だパンダ。 \n\n ================== \n 参加予定はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
         options.body.messages[0]['text'] = message;
         request(options, (err, response, body) => {

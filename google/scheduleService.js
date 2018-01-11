@@ -85,7 +85,8 @@ function listAllEvents(auth,cb) {
             var end = event.end.dateTime || event.start.date;
             var formattedEnd = moment(end).utcOffset(9).format("k:mm");
             var location = !!event.location ? event.location : "場所未定";
-            buf.push(formatted + "-" + formattedEnd + "@" + location);
+            var description = !!event.description ? event.description : "";
+            buf.push(formatted + "-" + formattedEnd + "@" + location + "\n\n" + description);
 
             console.log('%s - %s', start, event.summary);
           }
