@@ -83,7 +83,7 @@ app.post('/hook', (req, res) => {
         optionsPost.body.messages[0]['text'] = message;
         optionsPost.body.to = idTestGroup;
         request(optionsPost, (err, response, body) => {
-          console.log('okuttade';
+          console.log('okuttade');
         });
       });
 
