@@ -5,7 +5,7 @@ var request = require('request');
 var app = express();
 var scheduleService = require('./google/scheduleService.js');
 const densukeUrl = "https://densuke.biz/list?cd=sQFkNy4e6fmhpmwY";
-const portalUrl = "https://sites.google.com/site/sasanohaportal/home/practice";
+const portalUrl = "https://sites.google.com/site/sasanohaportal/home";
 const idToPost = "Ubdd6d86e0412809cc477c9adb6c0149f";
 const idTestGroup = "Cf72df3225c7e3234f8b500dc4a5fece4";
 const pushEndPoint = "https://api.line.me/v2/bot/message/push";
