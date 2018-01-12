@@ -58,15 +58,15 @@ app.post('/hook', (req, res) => {
       });
     }
     options.body.replyToken = req.body.events[0].replyToken;
-    // if(req.body.events[0].message.text.indexOf('パンダ！次の練習') != -1){
-    //   scheduleService.getOurEvents((b) => {
-    //     let message = formatEvent(b);
-    //     options.body.messages[0]['text'] = message;
-    //     request(options, (err, response, body) => {
-    //       console.log('body: ' + JSON.stringify(body))
-    //     });
-    //   });
-    // };
+    if(req.body.events[0].message.text.indexOf('パンダ！次の練習') != -1){
+      scheduleService.getOurEvents((b) => {
+        let message = formatEvent(b);
+        options.body.messages[0]['text'] = message;
+        request(options, (err, response, body) => {
+          console.log('body: ' + JSON.stringify(body))
+        });
+      });
+    };
     res.send('OK')
   });
 
