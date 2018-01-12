@@ -4,9 +4,7 @@ var moment = require('moment');
 
 const sasanohaCalId = "sasanoha.choir@google.com";
 
-var buf = [];
 getOurEvents = (cb) => {
-  buf = [];
 
   // Load client secrets from a local file.
   const content = process.env['CALENDAR_SECRET'];
@@ -79,8 +77,8 @@ function listAllEvents(auth,cb) {
         singleEvents: true,
         orderBy: 'startTime'
       }, (err2, res2) => {
+        let buf = [];
         if (err2) {
-          doneCals++;
           console.log('The API returned an error: ' + err2);
           return;
         }
@@ -97,8 +95,7 @@ function listAllEvents(auth,cb) {
             console.log('%s - %s', event.start.dateTime, event.summary);
           }
         }
-        doneCals++;
-        if (doneCals + 1 >= numCals) {
+        if (buf.length < 0) {
           return cb(buf);
         }
       });
