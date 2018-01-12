@@ -73,11 +73,10 @@ app.post('/hook', (req, res) => {
   app.post('/pushThisWeek', (req, res) => {
       let message = req.body.message || "今週の練習をお知らせするパンダ";
       message = message + "\n\n"
-      console.log('index.js 76: '+ message);
       // console.dir(req.body.message);
       scheduleService.getOurEvents((b) => {
         message = message + formatEvent(b);
-        console.log('index.js 80: '+ message);
+        console.log('index.js 80:');
         let optionsPost = Object.assign({}, options);
         optionsPost.uri = pushEndPoint;
         optionsPost.body.messages[0]['text'] = message;

@@ -65,10 +65,6 @@ function listAllEvents(auth,cb) {
     var doneCals = 0;
     for (i = 0; i < res.items.length; i++) {
       var calId = res.items[i].id;
-      if(calId !== sasanohaCalId) {
-        console.log('compare: ' + calId);
-        continue;
-      }
       var tday = moment();
       var targetMonth = tday.add(2, 'months');
       console.log("get "+calId);
