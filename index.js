@@ -7,6 +7,9 @@ var scheduleService = require('./google/scheduleService.js');
 const densukeUrl = "https://densuke.biz/list?cd=sQFkNy4e6fmhpmwY";
 const portalUrl = "https://sites.google.com/site/sasanohaportal/home/practice";
 const idToPost = "Ubdd6d86e0412809cc477c9adb6c0149f";
+const pushEndPoint = "https://api.line.me/v2/bot/message/push";
+
+const commonInfo = "\nだパンダ。 \n\n ================== \n 参加予定はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl
 
 var options = {
   method: 'POST',
@@ -23,7 +26,16 @@ var options = {
   json: true
 };
 
-var pushEndPoint = "https://api.line.me/v2/bot/message/push";
+
+var formatEvent = function(b) {
+  console.log(b);
+  let message = "次の練習は\n\n"
+    console.log('schedule is :' + b[0]);
+    message = message + "・" +b[0] + "\n\n";
+    console.log(message);
+
+  return message +  commonInfo;
+};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -39,53 +51,38 @@ app.post('/hook', (req, res) => {
     var userId = req.body.events[0].source.groupId || req.body.events[0].source.userId;
     console.log('userId: ' + userId);
     console.log(req.body.events[0].message.text);
-    // if(req.body.events[0].type === "join") {
-    //   fs.open("/files/contact", 'a+', function(file){
-    //     fs.appendFile(file, userId);
-    //   });
-    // }
+    if(req.body.events[0].type === "join") {
+      fs.open("/files/contact", 'a+', function(file){
+        fs.appendFile(file, userId);
+      });
+    }
     options.body.replyToken = req.body.events[0].replyToken;
     if(req.body.events[0].message.text.indexOf('次の練習') != -1){
       scheduleService.getOurEvents((b) => {
-        console.log(b);
-        let message = "次の練習は\n\n"
-        // for(i=0; i < b.length; i++){
-        //   console.log('schedule is :' + b[i]);
-        //   message = message + "・" +b[i] + "\n\n";
-        //   console.log(message);
-        // }
-          console.log('schedule is :' + b[0]);
-          message = message + "・" +b[0] + "\n\n";
-          console.log(message);
-
-        message = message + "だパンダ。 \n\n ================== \n 参加予定はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
+        let message = formatEvent(b);
         options.body.messages[0]['text'] = message;
         request(options, (err, response, body) => {
           console.log('body: ' + JSON.stringify(body))
         });
-
       });
     };
     res.send('OK')
   });
 
   app.post('/pushThisWeek', (req, res) => {
-      let message = "今週の練習は\n\n";
-      console.dir(req.body.event);
-      // let schedule = scheduleService.formatGoogleEvent(req.body.event);
-      // message = message + "・" + schedule + "\n\n だパンダ \n\n\n\n 参加予定変わった人はこちらから入力してください：" + densukeUrl + "\n まとめサイトはこちら：" + portalUrl;
-
-      let optionsPost = Object.assign({}, options);
-      optionsPost.uri = pushEndPoint;
-      optionsPost.body.messages[0]['text'] = message;
-      optionsPost.body.to = idToPost;
-      request(optionsPost, (err, response, body) => {
-        console.log('body: ' + JSON.stringify(body));
+      let message = req.body.message || "今週の練習をお知らせするパンダ\n\n";
+      message = message + "\n\n"
+      console.dir(req.body.message);
+      scheduleService.getOurEvents((b) => {
+        message = message + formatEvent(b);
+        let optionsPost = Object.assign({}, options);
+        optionsPost.uri = pushEndPoint;
+        optionsPost.body.messages[0]['text'] = message;
+        optionsPost.body.to = idToPost;
+        request(optionsPost, (err, response, body) => {
+          console.log('body: ' + JSON.stringify(body));
+        });
       });
-      res.send('OK');
-  });
 
-  app.post('/pushTommorow', (req, res) => {
-    console.log(req);
-    res.send('ok');
+      res.send('OK');
   });
