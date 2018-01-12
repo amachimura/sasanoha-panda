@@ -2,6 +2,8 @@ var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var moment = require('moment');
 
+const sasanohaCalId = "d4vcejmann1u1q1n0e3ms2oun8@group.calendar.google.com";
+
 var buf = [];
 getOurEvents = (cb) => {
   buf = [];
@@ -63,6 +65,9 @@ function listAllEvents(auth,cb) {
     var doneCals = 0;
     for (i = 0; i < res.items.length; i++) {
       var calId = res.items[i].id;
+      if(calId !== sasanohaCalId) {
+        continue;
+      }
       var tday = moment();
       var targetMonth = tday.add(2, 'months');
       console.log("get "+calId);
