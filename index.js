@@ -50,7 +50,7 @@ var server = app.listen(process.env.PORT || 3000, function(){
 app.post('/hook', (req, res) => {
     var userId = req.body.events[0].source.groupId || req.body.events[0].source.userId;
     console.log('userId: ' + userId);
-    console.log(req.body.events[0].message.text);
+//    console.log(req.body.events[0].message.text);
     if(req.body.events[0].type === "join") {
       fs.open("/files/contact", 'a+', function(file){
         fs.appendFile(file, userId);
