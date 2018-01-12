@@ -78,7 +78,7 @@ app.post('/hook', (req, res) => {
       let optionsPost = Object.assign({}, options);
       optionsPost.uri = pushEndPoint;
       optionsPost.body.messages[0]['text'] = message;
-      optionsPost.to = idToPost;
+      optionsPost.body.to = idToPost;
       request(optionsPost, (err, response, body) => {
         console.log('body: ' + JSON.stringify(body));
       });
