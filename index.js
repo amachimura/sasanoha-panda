@@ -70,7 +70,7 @@ app.post('/hook', (req, res) => {
     res.send('OK')
   });
 
-  app.post('/pushThisWeek', (req, res) => {
+  app.post('/pushNext', (req, res) => {
 
 
       // console.dir(req.body.message);

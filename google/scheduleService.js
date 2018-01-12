@@ -95,7 +95,7 @@ function listAllEvents(auth,cb) {
             console.log('%s - %s', event.start.dateTime, event.summary);
           }
         }
-        if (buf.length < 0) {
+        if (buf.length > 0) {
           return cb(buf);
         }
       });
