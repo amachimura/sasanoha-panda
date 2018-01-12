@@ -82,9 +82,7 @@ app.post('/hook', (req, res) => {
         optionsPost.uri = pushEndPoint;
         optionsPost.body.messages[0]['text'] = message;
         optionsPost.body.to = idTestGroup;
-        request(optionsPost, (err, response, body) => {
-          console.log('okuttade');
-        });
+        request(optionsPost);
       });
 
       res.send('OK');
