@@ -71,10 +71,12 @@ app.post('/hook', (req, res) => {
   });
 
   app.post('/pushThisWeek', (req, res) => {
-      let message = req.body.message || "今週の練習をお知らせするパンダ";
-      message = message + "\n\n"
+
+
       // console.dir(req.body.message);
       scheduleService.getOurEvents((b) => {
+        let message = req.body.message || "今週の練習をお知らせするパンダ";
+        message = message + "\n\n";
         message = message + formatEvent(b);
         console.log('index.js 80:');
         let optionsPost = Object.assign({}, options);
