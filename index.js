@@ -73,15 +73,17 @@ app.post('/hook', (req, res) => {
   app.post('/pushThisWeek', (req, res) => {
       let message = req.body.message || "今週の練習をお知らせするパンダ";
       message = message + "\n\n"
-      console.dir(req.body.message);
+      console.log('index.js 76: '+ message);
+      // console.dir(req.body.message);
       scheduleService.getOurEvents((b) => {
         message = message + formatEvent(b);
+        console.log('index.js 80: '+ message);
         let optionsPost = Object.assign({}, options);
         optionsPost.uri = pushEndPoint;
         optionsPost.body.messages[0]['text'] = message;
         optionsPost.body.to = idTestGroup;
         request(optionsPost, (err, response, body) => {
-          console.log('body: ' + JSON.stringify(body));
+          console.log('okuttade';
         });
       });
 
