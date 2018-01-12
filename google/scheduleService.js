@@ -66,6 +66,7 @@ function listAllEvents(auth,cb) {
     for (i = 0; i < res.items.length; i++) {
       var calId = res.items[i].id;
       if(calId !== sasanohaCalId) {
+        console.log('compare: ' + calId);
         continue;
       }
       var tday = moment();
