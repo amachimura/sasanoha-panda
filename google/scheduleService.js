@@ -2,7 +2,7 @@ var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var moment = require('moment');
 
-const sasanohaCalId = "d4vcejmann1u1q1n0e3ms2oun8@group.calendar.google.com";
+const sasanohaCalId = "sasanoha.choir@google.com";
 
 var buf = [];
 getOurEvents = (cb) => {
