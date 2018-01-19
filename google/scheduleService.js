@@ -20,10 +20,9 @@ formatGoogleEvent = (event) => {
   var end = event.end.dateTime || event.start.date;
   var formattedEnd = moment(end).utcOffset(9).format("k:mm");
   var location = !!event.location ? event.location : "場所未定";
-  var url = !!event.url ? event.url : "";
   var description = !!event.description ? event.description : "";
 
-  return formatted + "-" + formattedEnd + "@" + location +"\n" + url +"\n\n" + description;
+  return formatted + "-" + formattedEnd + "@" + location +"\n" + description;
 }
 
 /**
